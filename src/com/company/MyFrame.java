@@ -9,7 +9,6 @@ public class MyFrame extends JFrame{
         add(gui);
         gui.buttonAdd("Isfan",200,100,1000,900);
         gui.buttonAdd("Giri",200,100,0,0);
-        gui.DragPanel("enhanced-buzz-1492-1379411828-15.jpg");
         gui.radioButtonAdd();
 
         this.setTitle("tets");

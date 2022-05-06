@@ -24,7 +24,6 @@ public class GUI extends JPanel {
             System.out.println(e.getActionCommand());
         }
     }
-
         ImageIcon image;
         int WIDTH;
         int HEIGHT;
@@ -41,9 +40,15 @@ public class GUI extends JPanel {
             this.addMouseMotionListener(dragListener);
         }
 
-        public void paintComponent(Graphics g) {
+        public void paintComponent(Graphics g){
             super.paintComponent(g);
-            image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
+            try {
+                    image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
+            }
+            catch(NullPointerException e) {
+                System.out.println("NullPointerException thrown!");
+            }
+
         }
 
         private class ClickListener extends MouseAdapter {
@@ -77,10 +82,10 @@ public class GUI extends JPanel {
         }
         public void actionPerformedRadio(ActionEvent e){
         if(r1.isSelected()){
-            System.out.println("a");
+            DragPanel("enhanced-buzz-1492-1379411828-15.jpg");
         }
         if(r2.isSelected()){
-            System.out.println("b");
+        DragPanel("image.jpg");
         }
     }
     }
