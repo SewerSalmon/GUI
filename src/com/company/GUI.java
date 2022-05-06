@@ -10,7 +10,6 @@ public class GUI extends JPanel {
 
     public void buttonAdd(String name, int width, int height, int x, int y) {
         JButton button1;
-        System.out.println("SQUENCE: Added Button " + name);
         this.setPreferredSize(new Dimension(width, height));
         button1 = new JButton(name);
         button1.setBounds(x, y, width, height);
@@ -28,7 +27,7 @@ public class GUI extends JPanel {
         int WIDTH;
         int HEIGHT;
         Point imageCorner;
-        Point prevPt;
+        Point prevPt=new Point(0,0);
         public void DragPanel(String FileLocation) {
             image = new ImageIcon(FileLocation);
             WIDTH = image.getIconWidth();
@@ -83,9 +82,13 @@ public class GUI extends JPanel {
         public void actionPerformedRadio(ActionEvent e){
         if(r1.isSelected()){
             DragPanel("enhanced-buzz-1492-1379411828-15.jpg");
+            imageCorner.setLocation(prevPt);
+            repaint();
         }
         if(r2.isSelected()){
         DragPanel("image.jpg");
+            imageCorner.setLocation(prevPt);
+            repaint();
         }
     }
     }
