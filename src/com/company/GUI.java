@@ -94,11 +94,11 @@ public class GUI extends JPanel {
                 imageCorner.setLocation(prevPt);
                 repaint();
             }
-        if(e.getActionCommand().equals("Female")){
-        DragPanel("image.jpg");
-            imageCorner.setLocation(prevPt);
-            repaint();
-        }
+            if(e.getActionCommand().equals("Female")){
+                DragPanel("image.jpg");
+                imageCorner.setLocation(prevPt);
+                repaint();
+            }
     }
     }
 

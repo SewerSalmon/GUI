@@ -1,0 +1,21 @@
+-choose save
+-current save
+-overall save combination of all progress
+
+----------------------------------------------------------------------------------------
+{Map} arrows to navigate
+ +Cheats(see whole map/maybe edit save?)
+ 	if enabled
+        +how many of each perk you have / increase it
+        +unlock certain biome
+        +unlcok whole map
+	+edit gold    
+      % of map unlocked
+      +list of secrets select one to get a help tip
+ //when hover over section show biome name if clicked and unlocked take to biomes frame     
+----------------------------------------------------------------------------------------
++unlocked biomes at top
+{Display selected biome} and can scroll aron
+//display data about this biome if unlocked
+=place for user notes about the biome
+----------------------------------------------------------------------------------------

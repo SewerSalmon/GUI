@@ -8,6 +8,7 @@ public class MyFrame extends JFrame{
    GUI gui = new GUI();
 
     MyFrame(){
+
         add(gui);
         gui.buttonAdd("Isfan",200,100,100,900);
         gui.buttonAdd("Giri",200,100,0,0);
