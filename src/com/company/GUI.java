@@ -10,13 +10,12 @@ public class GUI extends JPanel {
     }
 
     public void buttonAdd(String name, int width, int height, int x, int y) {
-        JButton button1;
+        JButton button;
         this.setPreferredSize(new Dimension(width, height));
-        button1 = new JButton(name);
-        button1.setBounds(x, y, width, height);
-        button1.setLocation(new Point(x, y));
-        button1.addActionListener(new ClickButton());
-        add(button1);
+        button = new JButton(name);
+        button.setBounds(x, y, width, height);
+        button.addActionListener(new ClickButton());
+        add(button);
     }
 
     private class ClickButton implements ActionListener {
@@ -25,8 +24,6 @@ public class GUI extends JPanel {
             System.out.println(e.getActionCommand());
         }
     }
-
-
 
     ImageIcon image;
     int WIDTH;
@@ -45,12 +42,12 @@ public class GUI extends JPanel {
         this.addMouseMotionListener(dragListener);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (!(imageCorner == null)) {
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
         }
-
     }
 
     boolean ClickedInImage;
@@ -83,18 +80,17 @@ public class GUI extends JPanel {
             JRadioButton r1;
             r1=new JRadioButton(name);
             r1.setBounds(x,y,width,height);
-            r1.setLocation(new Point(x,y));
             r1.addActionListener(this::actionPerformedRadio);
             e.add(r1);
             add(r1);
         }
         public void actionPerformedRadio(ActionEvent e){
-            if(e.getActionCommand().equals("Male")){
+            if(e.getActionCommand().equals("Hedgehog")){
                 DragPanel("enhanced-buzz-1492-1379411828-15.jpg");
                 imageCorner.setLocation(prevPt);
                 repaint();
             }
-            if(e.getActionCommand().equals("Female")){
+            if(e.getActionCommand().equals("Boat")){
                 DragPanel("image.jpg");
                 imageCorner.setLocation(prevPt);
                 repaint();
