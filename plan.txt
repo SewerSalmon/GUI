@@ -9,13 +9,14 @@
         +how many of each perk you have / increase it
         +unlock certain biome
         +unlcok whole map
-	+edit gold    
+	    +edit gold
+	    +edit wands everywhere
       % of map unlocked
       +list of secrets select one to get a help tip
  //when hover over section show biome name if clicked and unlocked take to biomes frame     
 ----------------------------------------------------------------------------------------
-+unlocked biomes at top
-{Display selected biome} and can scroll aron
++other unlocked biomes at top
+{Display selected biome} and can scroll around
 //display data about this biome if unlocked
 =place for user notes about the biome
 ----------------------------------------------------------------------------------------
