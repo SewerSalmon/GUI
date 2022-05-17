@@ -10,7 +10,6 @@ public class GUI extends JPanel {
 
     public void buttonAdd(String name, int width, int height, int x, int y) {
         JButton button;
-        this.setPreferredSize(new Dimension(width, height));
         button = new JButton(name);
         button.setBounds(x, y, width, height);
         button.addActionListener(new ClickButton());
