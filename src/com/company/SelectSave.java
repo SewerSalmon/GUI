@@ -4,33 +4,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class SelectSave extends JPanel {
     private JFrame frame = new JFrame("Choose");
 
+    String a = "C:/Users/16Walker_B/Desktop/asda.txt";
+    String b = "C:/Users/16Walker_B/Desktop/left.txt";
+    String c;
+
     public SelectSave(){
-        frame.setSize(200, 300);
+        setSize(200,300);
+        frame.setSize(200, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
+        this.setLayout(null);
 
-        JButton button1;
-        this.setPreferredSize(new Dimension(200,100));
-        button1 = new JButton("Current Save");
-        button1.setBounds(0,0,200,100);
-        button1.addActionListener(new ClickButton());
-        add(button1);
-
-        JButton button2;
-        this.setPreferredSize(new Dimension(200,100));
-        button2 = new JButton("Overall Save");
-        button2.setBounds(0,100,200,100);
-        button2.addActionListener(new ClickButton());
-        add(button2);
+        File f = new File(a);
+        if(f.exists()) {
+            JButton button1;
+            button1 = new JButton("Current Save");
+            button1.setBounds(17,10,150,50);
+            button1.addActionListener(new ClickButton());
+            add(button1);
+        }
+        File g = new File(a);
+        if(g.exists()) {
+            JButton button2;
+            button2 = new JButton("Overall Save");
+            button2.setBounds(17, 70, 150, 50);
+            button2.addActionListener(new ClickButton());
+            add(button2);
+        }else {
+        }
 
         JButton button3;
-        this.setPreferredSize(new Dimension(200,100));
         button3 = new JButton("Choose Save");
-        button3.setBounds(0,100,200,100);
+        button3.setBounds(17,130,150,50);
         button3.addActionListener(new ClickButton());
         add(button3);
 

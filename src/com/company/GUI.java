@@ -6,9 +6,10 @@ import java.awt.event.*;
 
 public class GUI extends JPanel {
     public GUI() {
+        this.setLayout(null);
     }
 
-    public void buttonAdd(String name, int width, int height, int x, int y) {
+    public void buttonAdd(String name, int x, int y,  int width, int height) {
         JButton button;
         button = new JButton(name);
         button.setBounds(x, y, width, height);

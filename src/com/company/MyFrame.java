@@ -13,11 +13,11 @@ public class MyFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         getContentPane().add(gui);
-        gui.buttonAdd("Isfan",150,100,100,100);
-        gui.buttonAdd("Giri",150,100,0,0);
+        gui.buttonAdd("Isfan",10,0,80,40);
+        gui.buttonAdd("Giri",100,0,80,40);
         ButtonGroup bg = new ButtonGroup();
-        gui.radioButtonAdd("Hedgehog",100,20,100,200,bg);
-        gui.radioButtonAdd("Boat",100,90,100,200,bg);
+        gui.radioButtonAdd("Hedgehog",200,0,80,40,bg);
+        gui.radioButtonAdd("Boat",300,0,80,40,bg);
 
 
 
