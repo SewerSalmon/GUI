@@ -2,12 +2,13 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class MyFrame extends JFrame{
 
    GUI gui = new GUI();
 
-    MyFrame(){
+    MyFrame(File saveFile){
         this.setTitle("tets");
         this.setSize(1920, 1080);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
