@@ -9,7 +9,7 @@ public class MyFrame extends JFrame{
    GUI gui = new GUI();
 
     MyFrame(File saveFile){
-        this.setTitle("tets");
+        this.setTitle(saveFile.getName());
         this.setSize(1920, 1080);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
