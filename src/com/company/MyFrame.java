@@ -20,8 +20,6 @@ public class MyFrame extends JFrame{
         gui.radioButtonAdd("Hedgehog",200,0,80,40,bg);
         gui.radioButtonAdd("Boat",300,0,80,40,bg);
 
-
-
         this.setVisible(true);
     }
 

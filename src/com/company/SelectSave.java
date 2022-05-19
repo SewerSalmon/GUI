@@ -80,7 +80,7 @@ public class SelectSave extends JPanel {
                 JFileChooser fileChooser = new JFileChooser();
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
                 fileChooser.setFileFilter(filter);
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                fileChooser.setCurrentDirectory(new File("C:/"));
                 int result = fileChooser.showOpenDialog(ff);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     selectedFile = fileChooser.getSelectedFile();
