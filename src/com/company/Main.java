@@ -1,10 +1,25 @@
 package com.company;
 
-import javax.swing.*;
+import com.company.MapFolder.Map;
 
 public class Main {
     public static void main(String[] args) {
-        SelectSave ss = new SelectSave();
+
+
+
+                Map g = new Map();
+                g.createGid();
+
+                g.move();
+                g.move();
+                g.move();
+                g.move();
+                g.move();
+                g.move();
+                g.move();
+                g.move();
+// just test code
     }
 
 }
+

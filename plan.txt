@@ -20,3 +20,7 @@
 //display data about this biome if unlocked
 =place for user notes about the biome
 ----------------------------------------------------------------------------------------
+
+1,2
+3,4
+
