@@ -10,14 +10,10 @@ public class Main {
                 Map g = new Map();
                 g.createGid();
 
-                g.move();
-                g.move();
-                g.move();
-                g.move();
-                g.move();
-                g.move();
-                g.move();
-                g.move();
+
+                while (true) {
+                    g.move();
+                }
 // just test code
     }
 

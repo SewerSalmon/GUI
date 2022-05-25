@@ -126,6 +126,12 @@ public class FileHandling {
         return null;
     }
 
+    public String getRecord(int rowNumber) {
+        rowNumber = rowNumber;
+        return readLineAt(rowNumber * ((getLargestString()*getCollums())+2));
+    }
+
+
     public void removeline(int toRemove){
         LinesInFile();
         try {

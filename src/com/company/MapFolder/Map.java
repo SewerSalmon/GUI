@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 public class Map {
     private MapSquare currentPos;
+    FileHandling fH = new FileHandling("Mapgrid.txt");
 
     public Map() {
+       fH.paddedSpaces();
     }
 
     public void SetCurrent(MapSquare b) {
@@ -17,36 +19,36 @@ public class Map {
     }
 
     private void CreateSurroundings() {
-        Database MG = new Database("MapGrid.txt");
-        MapSquare mapSquares[] = new MapSquare[MG.FileManagement.getCollums() * MG.getRecordCount()];
+        MapSquare mapSquares[] = new MapSquare[fH.getCollums() * fH.lineAmount];
         int counter = 0;
-        for (int x = 0; x < MG.getRecordCount(); x++) {
-            for (int y = 0; y < MG.FileManagement.getCollums(); y++) {
-                mapSquares[counter] = new MapSquare(Integer.parseInt(MG.getRecord(x + 1).split("\\s+")[y]));
+        for (int x = 0; x < fH.lineAmount; x++) {
+            for (int y = 0; y < fH.getCollums(); y++) {
+                mapSquares[counter] = new MapSquare(Integer.parseInt(fH.getRecord(x).split("\\s+")[y]));
                 counter++;
             }
         }
 
-        for (int x = 0; x < mapSquares.length; x++) {
-            if (currentPos.number() == mapSquares[x].number()) {
-                int row = x / MG.FileManagement.getCollums();
-                if (x - MG.FileManagement.getCollums() >= 0) {
-                    currentPos.setUp(mapSquares[x - MG.FileManagement.getCollums()]);
-                }
-                if (x + MG.FileManagement.getCollums() <= mapSquares.length - 1) {
-                    currentPos.setDown(mapSquares[x + MG.FileManagement.getCollums()]);
-                }
-                if (x - 1 >= row * MG.FileManagement.getCollums()) {
-                    currentPos.setLeft(mapSquares[x - 1]);
-                }
-                if (x + 1 <= ((row + 1) * MG.FileManagement.getCollums()) - 1) {
-                    currentPos.setRight(mapSquares[x + 1]);
-                }
-
+        int collums = fH.getCollums();
+        int row = currentPos.number()/collums;
+        int x = currentPos.number();
+        
+            if(x-collums>=0){
+                currentPos.setUp(mapSquares[x-collums]);
+            }
+            if(x+collums<=mapSquares.length-1){
+                currentPos.setDown(mapSquares[x+collums]);
+            }
+            if(x-1>=row*collums){
+                currentPos.setLeft(mapSquares[x-1]);
+            }
+            if(x+1<=((row+1)*collums-1)){
+                currentPos.setRight(mapSquares[x+1]);
             }
 
+          
+      
         }
-    }
+
 
         public void move(){
             Display();
@@ -93,14 +95,11 @@ public class Map {
 
 
         public void createGid(){
-            Map map = new Map();
-
-            Database MG = new Database("MapGrid.txt");
-            MapSquare mapSquares[] = new MapSquare[MG.FileManagement.getCollums()*MG.getRecordCount()];
+            MapSquare mapSquares[] = new MapSquare[fH.getCollums()*fH.lineAmount];
             int counter=0;
-            for(int x = 0; x<MG.getRecordCount();x++) {
-                for(int y = 0;y<MG.FileManagement.getCollums();y++) {
-                    mapSquares[counter] = new MapSquare(Integer.parseInt(MG.getRecord(x+1).split("\\s+")[y]));
+            for(int x = 0; x<fH.lineAmount;x++) {
+                for(int y = 0;y<fH.getCollums();y++) {
+                    mapSquares[counter] = new MapSquare(Integer.parseInt(fH.getRecord(x).split("\\s+")[y]));
                     counter++;
                 }
             }
