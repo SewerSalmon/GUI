@@ -84,13 +84,23 @@ public class GUI extends JPanel {
             add(r1);
         }
         public void actionPerformedRadio(ActionEvent e){
-            if(e.getActionCommand().equals("Hedgehog")){
-                DragPanel("Map Squares/3.jpg");
+            if(e.getActionCommand().equals("0")){
+                DragPanel("Map Squares/0.jpg");
                 imageCorner.setLocation(prevPt);
                 repaint();
             }
-            if(e.getActionCommand().equals("Boat")){
+            if(e.getActionCommand().equals("1")){
+                DragPanel("Map Squares/1.jpg");
+                imageCorner.setLocation(prevPt);
+                repaint();
+            }
+            if(e.getActionCommand().equals("2")){
                 DragPanel("Map Squares/2.jpg");
+                imageCorner.setLocation(prevPt);
+                repaint();
+            }
+            if(e.getActionCommand().equals("3")){
+                DragPanel("Map Squares/3.jpg");
                 imageCorner.setLocation(prevPt);
                 repaint();
             }

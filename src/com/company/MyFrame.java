@@ -17,9 +17,10 @@ public class MyFrame extends JFrame{
         gui.buttonAdd("Isfan",10,0,80,40);
         gui.buttonAdd("Giri",100,0,80,40);
         ButtonGroup bg = new ButtonGroup();
-        gui.radioButtonAdd("Hedgehog",200,0,80,40,bg);
-        gui.radioButtonAdd("Boat",300,0,80,40,bg);
-
+        gui.radioButtonAdd("0",200,0,80,40,bg);
+        gui.radioButtonAdd("1",300,0,80,40,bg);
+        gui.radioButtonAdd("2",400,0,80,40,bg);
+        gui.radioButtonAdd("3",500,0,80,40,bg);
         this.setVisible(true);
     }
 
