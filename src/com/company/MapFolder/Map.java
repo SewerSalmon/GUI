@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Map {
     private MapSquare currentPos;
     FileHandling fH = new FileHandling("Mapgrid.txt");
-    MapSquare mapSquares[];
+    MapSquare[] mapSquares;
 
     public Map() {
        fH.paddedSpaces();
@@ -80,11 +80,10 @@ public class Map {
             oldpos.clear();
         }
 
-        public void Display(){;
+        public void Display(){
             String newpos;
             newpos = currentPos.number()+"";
             System.out.println("currently at " + newpos);
-            return;
         }
 
 
