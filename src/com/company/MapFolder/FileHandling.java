@@ -1,10 +1,7 @@
 package com.company.MapFolder;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class FileHandling {
     public int lineAmount =0;
@@ -48,13 +45,10 @@ public class FileHandling {
                 if(temp.length ==1){// if array is only 1
                     temp = ToBeSplit[x].split("\\s+");//if the row hasnt been split (e.g no commas as it may have been split previously) then it splits by he white space" "
                 }
-
                 if(temp.length ==1){
 
                 }else {
-                    for (int y = 0; y < temp.length; y++) {
-                        splited.add(temp[y]);
-                    }
+                    splited.addAll(Arrays.asList(temp));
                     continu = 1;
                 }
             }
@@ -66,9 +60,9 @@ public class FileHandling {
                 int counts = 0;
 
                 WriteToFile("", false, false);
-                for (int y = 0; y < splited.size(); y++) {
-                    WriteToFile(splited.get(y), true, false);
-                    for (int x = 0; x < largestString  - splited.get(y).length(); x++) {
+                for (String s : splited) {
+                    WriteToFile(s, true, false);
+                    for (int x = 0; x < largestString - s.length(); x++) {
                         WriteToFile(" ", true, false);
                     }
                     counts++;
@@ -95,16 +89,16 @@ public class FileHandling {
     }
 
     public void setCollums(ArrayList<String> splited){
-        collums = 0;
+
         collums = splited.size()/lineAmount;
 
     }
 
     public void setLargestString(ArrayList<String> splited){
         int largestTest=0;
-        for(int i = 0; i < splited.size(); i++){
-            if(splited.get(i).length() > largestTest){
-                largestTest = splited.get(i).length();
+        for (String s : splited) {
+            if (s.length() > largestTest) {
+                largestTest = s.length();
 
             }
 
@@ -127,45 +121,16 @@ public class FileHandling {
     }
 
     public String getRecord(int rowNumber) {
-        rowNumber = rowNumber;
         return readLineAt(rowNumber * ((getLargestString()*getCollums())+2));
     }
 
 
-    public void removeline(int toRemove){
-        LinesInFile();
-        try {
-            FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            ArrayList<String> line = new ArrayList<>();
-
-            for (int x = 0; x < lineAmount; x++) {
-                line.add(br.readLine());
-            }
-
-            line.remove(toRemove-1);// -1 as it indexees at 0
-
-            int counts = 0;
-
-            WriteToFile("", false, false);
-            for (int y = 0; y < line.size(); y++) {
-                WriteToFile(line.get(y), true, true);
-                counts++;
-            }
-            LinesInFile();
-
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-
-    }
-
     public void WriteToFile(String text,Boolean append, Boolean NextLine){
         try (//true = new line false = replace whole file
              FileWriter fw = new FileWriter(fileName, append);
-             PrintWriter pw = new PrintWriter(fw);
+             PrintWriter pw = new PrintWriter(fw)
         ){
-            if(NextLine == true){
+            if(NextLine){
                 pw.println(text);
             }else {pw.print(text);}
         }

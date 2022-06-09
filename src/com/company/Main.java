@@ -2,26 +2,42 @@ package com.company;
 
 import com.company.MapFolder.Map;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-       // new SelectSave();
+       new BiomeDisplay();
         String arrayS[] = {"isfandyol","isfandyola","gerish","banjemin","d_nial","atharvGosk","ablative","louisE","louisM","epicGamer"};
 
         System.out.println(Arrays.toString(arrayS));
-        arrayS = (String[]) selectionSort(arrayS,false);
+        arrayS = (String[]) alphabetical(arrayS,false);
         System.out.println(Arrays.toString(arrayS));
-        arrayS = (String[]) selectionSort(arrayS,true);
+        arrayS = (String[]) alphabetical(arrayS,true);
         System.out.println(Arrays.toString(arrayS));
-        arrayS = (String[]) shuffleArray(arrayS);
+        arrayS = (String[]) shuffle(arrayS);
         System.out.println(Arrays.toString(arrayS));
+
+        int arrayN[] = {86,2967,1,2,6,7,9,3,4,6,7,18,9,92,35,4,56,87,90,34,67,128,127,1};
+        Character arrayC[] = new Character[arrayN.length];
+        for (int i = 0; i < arrayN.length; i++)
+            arrayC[i] = (char) (arrayN[i]);
+
+        System.out.println(Arrays.toString(arrayN));
+        arrayC = (Character[]) alphabetical(arrayC,false);
+        for (int i = 0; i < arrayN.length; i++)
+            arrayN[i] = ((int)(arrayC[i]));
+        System.out.println(Arrays.toString(arrayN));
+        arrayC = (Character[]) alphabetical(arrayC,true);
+        for (int i = 0; i < arrayN.length; i++)
+            arrayN[i] = ((int)(arrayC[i]));
+        System.out.println(Arrays.toString(arrayN));
 
     }
 
-    static Comparable[] selectionSort(Comparable[] array,boolean descend)
-    {
+    public static Comparable[]  alphabetical(Comparable[] array, boolean reverse){
         int smallest;
         for(int i = 0; i < array.length; i++)
         {
@@ -33,15 +49,15 @@ public class Main {
                 swap(array, smallest, i);
         }
 
-        if(descend){
+        if(reverse){
             for (int i = 0; i < array.length / 2; i++) {
                 swap(array,i,array.length - 1 - i);
             }
         }
         return array;
     }
-    static Object[] shuffleArray(Object[] array)
-    {
+
+    public static Object[] shuffle(Object[] array){
         // If running on Java 6 or older, use `new Random()` on RHS here
         Random rnd = new Random();
         for (int i = array.length - 1; i > 0; i--)
@@ -55,9 +71,7 @@ public class Main {
         return array;
     }
 
-
-    static void swap(Object[] array, int index1, int index2)
-    {
+    static void swap(Object[] array, int index1, int index2){
         Object temp = array[index1];
         array[index1] = array[index2];
         array[index2] = temp;

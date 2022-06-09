@@ -20,6 +20,11 @@ public class MyFrame extends JFrame{
         gui.radioButtonAdd("2",400,0,80,40,bg);
         gui.radioButtonAdd("3",500,0,80,40,bg);
         this.setVisible(true);
+        gui.setVisible(false);
+
+
+
+
     }
 
 

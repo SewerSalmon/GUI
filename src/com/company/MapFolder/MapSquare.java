@@ -1,7 +1,7 @@
 package com.company.MapFolder;
 public class MapSquare {
 
-    private int number;
+    private final int number;
     private MapSquare up;
     private MapSquare down;
     private MapSquare left;

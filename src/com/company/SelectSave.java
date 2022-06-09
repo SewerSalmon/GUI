@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class SelectSave extends JPanel {
-    private JFrame frame = new JFrame("Choose");
+    private final JFrame frame = new JFrame("Choose");
 
     String a = "C:/Users/16Walker_B/Desktop/asda.txt";
     String b = "C:/Users/16Walker_B/Desktop/left.txt";
@@ -85,6 +85,7 @@ public class SelectSave extends JPanel {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     selectedFile = fileChooser.getSelectedFile();
                 }
+                assert selectedFile != null;
                 if(selectedFile.getName().endsWith(".txt")){
                     MyFrame mf = new MyFrame(selectedFile);
                     frame.dispose();
