@@ -24,7 +24,9 @@ public class BiomeDisplay extends JPanel{
         biomes.add(buttonAdd("City",175,0,80,40));
         biomes.add(buttonAdd("Tundra",260,0,80,40));
         biomes.add(buttonAdd("Beach",345,0,80,40));
-        sort = buttonAdd("Sort",180,100,80,40);
+        sort = buttonAdd("Alphabetical",100,100,80,40);
+        sort = buttonAdd("shuffle",180,100,80,40);
+        sort = buttonAdd("ReverseAlpha",260,100,80,40);
         frame.setVisible(true);
     }
 
@@ -42,7 +44,7 @@ public class BiomeDisplay extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println(e.getActionCommand());
-            if (e.getActionCommand().equals("Sort")) {
+            if (e.getActionCommand().equals("Alphabetical")) {
                 String[] names = new String[biomes.size()];
 
                 for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
@@ -56,8 +58,36 @@ public class BiomeDisplay extends JPanel{
                        }
                    }
                 }
+            }
+            if (e.getActionCommand().equals("shuffle")) {
+                String[] names = new String[biomes.size()];
 
+                for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
 
+                names = (String[]) shuffle(names);
+
+                for (int i = 0; i < names.length; i++) {
+                    for (int y = 0; y<names.length;y++){
+                        if (names[i].equals(biomes.get(y).getActionCommand())){
+                            biomes.get(y).setBounds(5+(i*85),0,80,40);
+                        }
+                    }
+                }
+            }
+            if (e.getActionCommand().equals("ReverseAlpha")) {
+                String[] names = new String[biomes.size()];
+
+                for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
+
+                names = (String[]) alphabetical(names, true);
+
+                for (int i = 0; i < names.length; i++) {
+                    for (int y = 0; y<names.length;y++){
+                        if (names[i].equals(biomes.get(y).getActionCommand())){
+                            biomes.get(y).setBounds(5+(i*85),0,80,40);
+                        }
+                    }
+                }
             }
         }
     }

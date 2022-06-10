@@ -10,15 +10,6 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
        new BiomeDisplay();
-        String arrayS[] = {"isfandyol","isfandyola","gerish","banjemin","d_nial","atharvGosk","ablative","louisE","louisM","epicGamer"};
-
-        System.out.println(Arrays.toString(arrayS));
-        arrayS = (String[]) alphabetical(arrayS,false);
-        System.out.println(Arrays.toString(arrayS));
-        arrayS = (String[]) alphabetical(arrayS,true);
-        System.out.println(Arrays.toString(arrayS));
-        arrayS = (String[]) shuffle(arrayS);
-        System.out.println(Arrays.toString(arrayS));
 
         int arrayN[] = {86,2967,1,2,6,7,9,3,4,6,7,18,9,92,35,4,56,87,90,34,67,128,127,1};
         Character arrayC[] = new Character[arrayN.length];
