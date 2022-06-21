@@ -1,17 +1,12 @@
 package com.company;
 
-import com.company.MapFolder.Map;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 public class Main {
     public static void main(String[] args) {
-       new BiomeDisplay();
+        new BiomeDisplay();
 
-        int arrayN[] = {86,2967,1,2,6,7,9,3,4,6,7,18,9,92,35,4,56,87,90,34,67,128,127,1};
+    }
+}
+    /*  int arrayN[] = {86,2967,1,2,6,7,9,3,4,6,7,18,9,92,35,4,56,87,90,34,67,128,127,1};
         Character arrayC[] = new Character[arrayN.length];
         for (int i = 0; i < arrayN.length; i++)
             arrayC[i] = (char) (arrayN[i]);
@@ -68,7 +63,7 @@ public class Main {
         array[index2] = temp;
     }
 }
-
+*/
 
 
 

@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ import java.util.Random;
 public class BiomeDisplay extends JPanel{
     ArrayList<JButton> biomes = new ArrayList<>();
     JButton sort;
-
+    ImageIcon image;
+    Point imageCorner;
 
     public BiomeDisplay(){
         setSize(500,500);
@@ -19,11 +21,10 @@ public class BiomeDisplay extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
         this.setLayout(null);
-        biomes.add(buttonAdd("Forest",5,0,80,40));
-        biomes.add(buttonAdd("SnowArea",90,0,80,40));
-        biomes.add(buttonAdd("City",175,0,80,40));
-        biomes.add(buttonAdd("Tundra",260,0,80,40));
-        biomes.add(buttonAdd("Beach",345,0,80,40));
+        biomes.add(buttonAdd("StarThing",5,0,80,40));
+        biomes.add(buttonAdd("Stairs",90,0,80,40));
+        biomes.add(buttonAdd("Something",260,0,80,40));
+        biomes.add(buttonAdd("Street",345,0,80,40));
         sort = buttonAdd("Alphabetical",100,100,80,40);
         sort = buttonAdd("shuffle",180,100,80,40);
         sort = buttonAdd("ReverseAlpha",260,100,80,40);
@@ -43,7 +44,6 @@ public class BiomeDisplay extends JPanel{
     private class ClickButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getActionCommand());
             if (e.getActionCommand().equals("Alphabetical")) {
                 String[] names = new String[biomes.size()];
 
@@ -58,8 +58,7 @@ public class BiomeDisplay extends JPanel{
                        }
                    }
                 }
-            }
-            if (e.getActionCommand().equals("shuffle")) {
+            }else if (e.getActionCommand().equals("shuffle")) {
                 String[] names = new String[biomes.size()];
 
                 for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
@@ -73,8 +72,7 @@ public class BiomeDisplay extends JPanel{
                         }
                     }
                 }
-            }
-            if (e.getActionCommand().equals("ReverseAlpha")) {
+            }else if (e.getActionCommand().equals("ReverseAlpha")) {
                 String[] names = new String[biomes.size()];
 
                 for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
@@ -88,7 +86,19 @@ public class BiomeDisplay extends JPanel{
                         }
                     }
                 }
+            } else {
+                    image = new ImageIcon("Map Squares/"+ e.getActionCommand() +".jpg");
+                    imageCorner = new Point(0, 0);
+                    repaint();
+
             }
+        }
+    }
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (!(imageCorner == null)) {
+            image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
         }
     }
 

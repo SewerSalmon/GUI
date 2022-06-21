@@ -39,9 +39,9 @@ public class MapSquare {
         return right;
     }
     public void clear(){up = null; down = null; left = null; right = null;}
-
     public int number(){
         return number;
     }
+
 }
 
