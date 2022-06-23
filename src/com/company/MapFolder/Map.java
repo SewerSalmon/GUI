@@ -13,7 +13,7 @@ public class Map {
         int counter=0;
         for(int x = 0; x<fH.lineAmount;x++) {
             for(int y = 0;y<fH.getCollums();y++) {
-                mapSquares[counter] = new MapSquare(Integer.parseInt(fH.getRecord(x).split("\\s+")[y]));
+                mapSquares[counter] = new MapSquare(fH.getRecord(x).split("\\s+")[y],counter);
                 counter++;
             }
         }
@@ -28,7 +28,7 @@ public class Map {
         return currentPos;
     }
 
-    private void CreateSurroundings() {
+    public void CreateSurroundings() {
         int collums = fH.getCollums();
         int row = currentPos.number()/collums;
         int x = currentPos.number();
@@ -82,7 +82,7 @@ public class Map {
 
     public void Display(){
         String newpos;
-        newpos = currentPos.number()+"";
+        newpos = currentPos.name();
         System.out.println("currently at " + newpos);
     }
 }

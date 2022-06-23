@@ -1,15 +1,21 @@
 package com.company;
 
+import com.company.MapFolder.Map;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class GUI extends JPanel {
+    Map map = new Map();
     public GUI() {
         this.setLayout(null);
+        DragPanel("Map Squares/" +map.getCurrent().name()+".jpg",new Point(0,0));
+        imageCorner.setLocation(prevPt);
+        repaint();
     }
 
-    public void buttonAdd(String name, int x, int y,  int width, int height) {
+    public void buttonAdd(String name, int x, int y, int width, int height) {
         JButton button;
         button = new JButton(name);
         button.setBounds(x, y, width, height);
@@ -30,11 +36,11 @@ public class GUI extends JPanel {
     Point imageCorner;
     Point prevPt = new Point(0, 0);
 
-    public void DragPanel(String FileLocation) {
+    public void DragPanel(String FileLocation,Point point) {
         image = new ImageIcon(FileLocation);
         WIDTH = image.getIconWidth();
         HEIGHT = image.getIconHeight();
-        imageCorner = new Point(0, 0);
+        imageCorner = point;
         ClickListener clickListener = new ClickListener();
         DragListener dragListener = new DragListener();
         this.addMouseListener(clickListener);
@@ -45,6 +51,28 @@ public class GUI extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (!(imageCorner == null)) {
+            image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
+        // make the images interactable
+            map.CreateSurroundings();
+            ImageIcon surrondingImage;
+            if(map.getCurrent().getDown() != null){
+
+                surrondingImage = new ImageIcon("Map Squares/" +map.getCurrent().getDown().name()+".jpg");
+                surrondingImage.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY()+500);
+            }
+            if(map.getCurrent().getUp() != null){
+                surrondingImage = new ImageIcon("Map Squares/" +map.getCurrent().getUp().name()+".jpg");
+                surrondingImage.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY()-500);
+            }
+            if(map.getCurrent().getLeft() != null){
+                surrondingImage = new ImageIcon("Map Squares/" +map.getCurrent().getLeft().name()+".jpg");
+                surrondingImage.paintIcon(this, g, (int) imageCorner.getX()-500, (int) imageCorner.getY());
+            }
+            if(map.getCurrent().getRight() != null){
+                surrondingImage = new ImageIcon("Map Squares/" +map.getCurrent().getRight().name()+".jpg");
+                surrondingImage.paintIcon(this, g, (int) imageCorner.getX()+500, (int) imageCorner.getY());
+            }
+
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
         }
     }
@@ -74,38 +102,12 @@ public class GUI extends JPanel {
             }
         }
     }
+}
 
-    public void radioButtonAdd (String name,int x,int y,int width,int height, ButtonGroup e){
-            JRadioButton r1;
-            r1=new JRadioButton(name);
-            r1.setBounds(x,y,width,height);
-            r1.addActionListener(this::actionPerformedRadio);
-            e.add(r1);
-            add(r1);
-        }
-        public void actionPerformedRadio(ActionEvent e){
-            if(e.getActionCommand().equals("0")){
-                DragPanel("Map Squares/Street.jpg");
-                imageCorner.setLocation(prevPt);
-                repaint();
-            }
-            if(e.getActionCommand().equals("1")){
-                DragPanel("Map Squares/StarThing.jpg");
-                imageCorner.setLocation(prevPt);
-                repaint();
-            }
-            if(e.getActionCommand().equals("2")){
-                DragPanel("Map Squares/Something.jpg");
-                imageCorner.setLocation(prevPt);
-                repaint();
-            }
-            if(e.getActionCommand().equals("3")){
-                DragPanel("Map Squares/Stairs.jpg");
-                imageCorner.setLocation(prevPt);
-                repaint();
-            }
-    }
-    }
+
+
+
+
 
 
 

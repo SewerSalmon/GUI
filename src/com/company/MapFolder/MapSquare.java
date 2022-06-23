@@ -1,13 +1,15 @@
 package com.company.MapFolder;
 public class MapSquare {
 
+    private final String name;
     private final int number;
     private MapSquare up;
     private MapSquare down;
     private MapSquare left;
     private MapSquare right;
-    public MapSquare(int number){
-        this.number = number;
+    public MapSquare(String name,int number){
+        this.number =number;
+        this.name = name;
         up = null;
         down = null;
         left = null;
@@ -39,6 +41,9 @@ public class MapSquare {
         return right;
     }
     public void clear(){up = null; down = null; left = null; right = null;}
+    public String name(){
+        return name;
+    }
     public int number(){
         return number;
     }
