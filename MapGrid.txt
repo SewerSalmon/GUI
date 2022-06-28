@@ -1,2 +1,3 @@
-Something     Stairs        
-StarThing     Street        
+Something     Stairs        Stairs        Something     
+StarThing     Street        StarThing     Street        
+Street        Stairs        Something     StarThing     

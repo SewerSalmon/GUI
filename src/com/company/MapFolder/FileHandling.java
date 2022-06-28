@@ -43,7 +43,7 @@ public class FileHandling {
             for (int x =0;x< lineAmount;x++) {
                 temp = ToBeSplit[x].split(",");
                 if(temp.length ==1){// if array is only 1
-                    temp = ToBeSplit[x].split("\\s+");//if the row hasnt been split (e.g no commas as it may have been split previously) then it splits by he white space" "
+                    temp = ToBeSplit[x].split("\\s+");//if the row hasn't been split (e.g no commas as it may have been split previously) then it splits by the white space" "
                 }
                 if(temp.length ==1){
 
@@ -55,7 +55,6 @@ public class FileHandling {
             if(continu == 1) {
                 setLargestString(splited);
                 setCollums(splited);
-
 
                 int counts = 0;
 

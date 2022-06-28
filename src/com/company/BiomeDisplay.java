@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
@@ -110,6 +109,7 @@ public class BiomeDisplay extends JPanel{
             for(int j = i + 1; j < array.length; j++) // find smallest
                 if(array[j].compareTo(array[smallest]) < 0)
                     smallest = j;
+                
             if(smallest != i)
                 swap(array, smallest, i);
         }

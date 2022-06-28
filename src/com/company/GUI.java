@@ -10,6 +10,7 @@ public class GUI extends JPanel {
     Map map = new Map();
     public GUI() {
         this.setLayout(null);
+        map.CreateSurroundings();
         DragPanel("Map Squares/" +map.getCurrent().name()+".jpg",new Point(0,0));
         imageCorner.setLocation(prevPt);
         repaint();
@@ -53,10 +54,9 @@ public class GUI extends JPanel {
         if (!(imageCorner == null)) {
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
         // make the images interactable
-            map.CreateSurroundings();
             ImageIcon surrondingImage;
+            map.CreateSurroundings();
             if(map.getCurrent().getDown() != null){
-
                 surrondingImage = new ImageIcon("Map Squares/" +map.getCurrent().getDown().name()+".jpg");
                 surrondingImage.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY()+500);
             }
@@ -72,7 +72,6 @@ public class GUI extends JPanel {
                 surrondingImage = new ImageIcon("Map Squares/" +map.getCurrent().getRight().name()+".jpg");
                 surrondingImage.paintIcon(this, g, (int) imageCorner.getX()+500, (int) imageCorner.getY());
             }
-
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
         }
     }
@@ -84,8 +83,34 @@ public class GUI extends JPanel {
             if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
                 prevPt = e.getPoint();
                 ClickedInImage = true;
-            } else {
-                ClickedInImage = false;
+            }else{ClickedInImage = false;}
+            if((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + 500) && map.getCurrent().getDown() != null){
+                imageCorner = new Point((int) imageCorner.getX(),(int)imageCorner.getY()+500);
+                image = new ImageIcon("Map Squares/" +map.getCurrent().getDown().name()+".jpg");
+                map.SetCurrent(map.getCurrent().getDown());
+                prevPt = e.getPoint();
+                ClickedInImage = true;
+            }
+            if((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() - 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() - 500) && map.getCurrent().getUp() != null){
+                imageCorner = new Point((int) imageCorner.getX(),(int)imageCorner.getY()-500);
+                image = new ImageIcon("Map Squares/" +map.getCurrent().getUp().name()+".jpg");
+                map.SetCurrent(map.getCurrent().getUp());
+                prevPt = e.getPoint();
+                ClickedInImage = true;
+            }
+            if((e.getPoint().getX() <= imageCorner.getX() + 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getRight() != null){
+                imageCorner = new Point((int) imageCorner.getX()+500,(int)imageCorner.getY());
+                image = new ImageIcon("Map Squares/" +map.getCurrent().getRight().name()+".jpg");
+                map.SetCurrent(map.getCurrent().getRight());
+                prevPt = e.getPoint();
+                ClickedInImage = true;
+            }
+            if((e.getPoint().getX() <= imageCorner.getX() - 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() - 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getLeft() != null){
+                imageCorner = new Point((int) imageCorner.getX()-500,(int)imageCorner.getY());
+                image = new ImageIcon("Map Squares/" +map.getCurrent().getLeft().name()+".jpg");
+                map.SetCurrent(map.getCurrent().getLeft());
+                prevPt = e.getPoint();
+                ClickedInImage = true;
             }
         }
     }
