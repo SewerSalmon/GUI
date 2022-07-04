@@ -80,65 +80,77 @@ public class GUI extends JPanel {
 
     private class ClickListener extends MouseAdapter {
         public void mousePressed(MouseEvent e) {
-            if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
-                prevPt = e.getPoint();
-                ClickedInImage = true;
-            }else{ClickedInImage = false;}
-            if((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + 500) && map.getCurrent().getDown() != null){
-                imageCorner = new Point((int) imageCorner.getX(),(int)imageCorner.getY()+500);
-                image = new ImageIcon("Map Squares/" +map.getCurrent().getDown().name()+".jpg");
-                map.SetCurrent(map.getCurrent().getDown());
-                prevPt = e.getPoint();
-                ClickedInImage = true;
+            ClickedInImage = false;
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
+                    prevPt = e.getPoint();
+                    ClickedInImage = true;
+                } else {
+                    ClickedInImage = false;
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + 500) && map.getCurrent().getDown() != null) {
+                    imageCorner = new Point((int) imageCorner.getX(), (int) imageCorner.getY() + 500);
+                    image = new ImageIcon("Map Squares/" + map.getCurrent().getDown().name() + ".jpg");
+                    map.SetCurrent(map.getCurrent().getDown());
+                    prevPt = e.getPoint();
+                    ClickedInImage = true;
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() - 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() - 500) && map.getCurrent().getUp() != null) {
+                    imageCorner = new Point((int) imageCorner.getX(), (int) imageCorner.getY() - 500);
+                    image = new ImageIcon("Map Squares/" + map.getCurrent().getUp().name() + ".jpg");
+                    map.SetCurrent(map.getCurrent().getUp());
+                    prevPt = e.getPoint();
+                    ClickedInImage = true;
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() + 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getRight() != null) {
+                    imageCorner = new Point((int) imageCorner.getX() + 500, (int) imageCorner.getY());
+                    image = new ImageIcon("Map Squares/" + map.getCurrent().getRight().name() + ".jpg");
+                    map.SetCurrent(map.getCurrent().getRight());
+                    prevPt = e.getPoint();
+                    ClickedInImage = true;
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() - 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() - 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getLeft() != null) {
+                    imageCorner = new Point((int) imageCorner.getX() - 500, (int) imageCorner.getY());
+                    image = new ImageIcon("Map Squares/" + map.getCurrent().getLeft().name() + ".jpg");
+                    map.SetCurrent(map.getCurrent().getLeft());
+                    prevPt = e.getPoint();
+                    ClickedInImage = true;
+                }
             }
-            if((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() - 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() - 500) && map.getCurrent().getUp() != null){
-                imageCorner = new Point((int) imageCorner.getX(),(int)imageCorner.getY()-500);
-                image = new ImageIcon("Map Squares/" +map.getCurrent().getUp().name()+".jpg");
-                map.SetCurrent(map.getCurrent().getUp());
-                prevPt = e.getPoint();
-                ClickedInImage = true;
-            }
-            if((e.getPoint().getX() <= imageCorner.getX() + 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getRight() != null){
-                imageCorner = new Point((int) imageCorner.getX()+500,(int)imageCorner.getY());
-                image = new ImageIcon("Map Squares/" +map.getCurrent().getRight().name()+".jpg");
-                map.SetCurrent(map.getCurrent().getRight());
-                prevPt = e.getPoint();
-                ClickedInImage = true;
-            }
-            if((e.getPoint().getX() <= imageCorner.getX() - 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() - 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getLeft() != null){
-                imageCorner = new Point((int) imageCorner.getX()-500,(int)imageCorner.getY());
-                image = new ImageIcon("Map Squares/" +map.getCurrent().getLeft().name()+".jpg");
-                map.SetCurrent(map.getCurrent().getLeft());
-                prevPt = e.getPoint();
-                ClickedInImage = true;
+
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                BiomeDisplay BD;
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
+                    System.out.println(map.getCurrent().name().substring(1));
+                    BD = new BiomeDisplay(map.getCurrent().name().substring(1));
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() + 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
+                    System.out.println(map.getCurrent().getRight().name().substring(1));
+                    BD = new BiomeDisplay(map.getCurrent().getRight().name().substring(1));
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() - 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() - 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getLeft() != null) {
+                    System.out.println(map.getCurrent().getLeft().name().substring(1));
+                    BD = new BiomeDisplay(map.getCurrent().getLeft().name().substring(1));
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() - 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() - 500) && map.getCurrent().getUp() != null) {
+                    System.out.println(map.getCurrent().getUp().name().substring(1));
+                    BD = new BiomeDisplay(map.getCurrent().getUp().name().substring(1));
+                }
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + 500) && map.getCurrent().getDown() != null) {
+                    System.out.println(map.getCurrent().getDown().name().substring(1));
+                    BD = new BiomeDisplay(map.getCurrent().getDown().name().substring(1));
+                }
             }
         }
     }
-
     private class DragListener extends MouseMotionAdapter {
-
         public void mouseDragged(MouseEvent e) {
             if (ClickedInImage) {
                 Point currentPt = e.getPoint();//translate moves object by that much
                 imageCorner.translate((int) (currentPt.getX() - prevPt.getX()), (int) (currentPt.getY() - prevPt.getY()));
                 prevPt = currentPt;
                 repaint();
-
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

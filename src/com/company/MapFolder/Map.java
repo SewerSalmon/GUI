@@ -86,8 +86,3 @@ public class Map {
         System.out.println("currently at " + newpos);
     }
 }
-
-
-
-
-
