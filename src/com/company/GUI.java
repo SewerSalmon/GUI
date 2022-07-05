@@ -8,8 +8,12 @@ import java.awt.event.*;
 
 public class GUI extends JPanel {
     Map map = new Map();
-    public GUI() {
+    MyFrame change;
+    public GUI(MyFrame a) {
+        change = a;
         this.setLayout(null);
+        buttonAdd("Isfan",10,0,80,40);
+        buttonAdd("Giri",100,0,80,40);
         map.CreateSurroundings();
         DragPanel("Map Squares/" +map.getCurrent().name()+".jpg",new Point(0,0));
         imageCorner.setLocation(prevPt);
@@ -117,28 +121,22 @@ public class GUI extends JPanel {
                     ClickedInImage = true;
                 }
             }
-
             if (e.getButton() == MouseEvent.BUTTON3) {
                 BiomeDisplay BD;
                 if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
-                    System.out.println(map.getCurrent().name().substring(1));
-                    BD = new BiomeDisplay(map.getCurrent().name().substring(1));
+                    change.toBiome(map.getCurrent().name().substring(1));
                 }
                 if ((e.getPoint().getX() <= imageCorner.getX() + 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY())) {
-                    System.out.println(map.getCurrent().getRight().name().substring(1));
-                    BD = new BiomeDisplay(map.getCurrent().getRight().name().substring(1));
+                    change.toBiome(map.getCurrent().name().substring(1));
                 }
                 if ((e.getPoint().getX() <= imageCorner.getX() - 500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() - 500) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()) && map.getCurrent().getLeft() != null) {
-                    System.out.println(map.getCurrent().getLeft().name().substring(1));
-                    BD = new BiomeDisplay(map.getCurrent().getLeft().name().substring(1));
+                    change.toBiome(map.getCurrent().getLeft().name().substring(1));
                 }
                 if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() - 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() - 500) && map.getCurrent().getUp() != null) {
-                    System.out.println(map.getCurrent().getUp().name().substring(1));
-                    BD = new BiomeDisplay(map.getCurrent().getUp().name().substring(1));
+                    change.toBiome(map.getCurrent().getUp().name().substring(1));
                 }
                 if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX()) && (e.getPoint().getY() <= imageCorner.getY() + 500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + 500) && map.getCurrent().getDown() != null) {
-                    System.out.println(map.getCurrent().getDown().name().substring(1));
-                    BD = new BiomeDisplay(map.getCurrent().getDown().name().substring(1));
+                    change.toBiome(map.getCurrent().getDown().name().substring(1));
                 }
             }
         }

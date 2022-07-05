@@ -4,37 +4,42 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
-
     // make it swap map not make enterly new frame
-
-
     ArrayList<JButton> biomes = new ArrayList<>();
     JButton sort;
     ImageIcon image;
     Point imageCorner;
     String currentBiome;
+    MyFrame change;
 
-    public BiomeDisplay(String biome){
+    public BiomeDisplay(String biome, MyFrame a){
+        change = a;
         currentBiome = biome;
-        setSize(500,500);
-        JFrame frame = new JFrame("Biomes");
-        frame.setSize(500,500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(this);
         this.setLayout(null);
-        // make dynamic
-        biomes.add(buttonAdd("StarThing",5,0,80,40));
-        biomes.add(buttonAdd("Stairs",90,0,80,40));
-        biomes.add(buttonAdd("Something",260,0,80,40));
-        biomes.add(buttonAdd("Street",345,0,80,40));
+        // make dynamic e.g check for all different biome names , after only discovered ones
+
+        File[] folder = new File("Map Squares/").listFiles();
+        int xPos = 10;
+        for(File file: folder){
+            String name = file.getName().substring(1,file.getName().length()-4);
+            if(biomes.contains(// check if name matches past name if so dont add))
+            biomes.add(buttonAdd(name,xPos,0,100,40));
+            xPos = xPos+ 110;
+        }
+
+
+
+
+
         sort = buttonAdd("Alphabetical",100,100,80,40);
         sort = buttonAdd("shuffle",180,100,80,40);
         sort = buttonAdd("ReverseAlpha",260,100,80,40);
-        frame.setVisible(true);
+        JButton back = buttonAdd("back to map",400,500,100,80);
     }
 
     public JButton buttonAdd(String name, int x, int y,  int width, int height) {
@@ -63,7 +68,8 @@ public class BiomeDisplay extends JPanel{
                        }
                    }
                 }
-            }else if (e.getActionCommand().equals("shuffle")) {
+            }
+            else if (e.getActionCommand().equals("shuffle")) {
                 String[] names = new String[biomes.size()];
 
                 for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
@@ -77,7 +83,8 @@ public class BiomeDisplay extends JPanel{
                         }
                     }
                 }
-            }else if (e.getActionCommand().equals("ReverseAlpha")) {
+            }
+            else if (e.getActionCommand().equals("ReverseAlpha")) {
                 String[] names = new String[biomes.size()];
 
                 for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
@@ -91,11 +98,13 @@ public class BiomeDisplay extends JPanel{
                         }
                     }
                 }
+            }
+            else if(e.getActionCommand().equals("back to map")){
+                change.toMap();
             } else {
                     image = new ImageIcon("Map Squares/"+ e.getActionCommand() +".jpg");
                     imageCorner = new Point(0, 0);
                     repaint();
-
             }
         }
 
