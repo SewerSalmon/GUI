@@ -57,7 +57,7 @@ public class GUI extends JPanel {
         super.paintComponent(g);
         if (!(imageCorner == null)) {
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
-        // make the images interactable
+            //hover over show stats?
             ImageIcon surrondingImage;
             map.CreateSurroundings();
             if(map.getCurrent().getDown() != null){

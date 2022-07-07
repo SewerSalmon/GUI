@@ -6,12 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
     // make it swap map not make enterly new frame
     ArrayList<JButton> biomes = new ArrayList<>();
-    JButton sort;
+    JButton sort[] = new JButton[3];
     ImageIcon image;
     Point imageCorner;
     String currentBiome;
@@ -21,32 +22,33 @@ public class BiomeDisplay extends JPanel{
         change = a;
         currentBiome = biome;
         this.setLayout(null);
-        // make dynamic e.g check for all different biome names , after only discovered ones
-
         File[] folder = new File("Map Squares/").listFiles();
+
         int xPos = 10;
         for(File file: folder){
+            boolean exists = false;
             String name = file.getName().substring(1,file.getName().length()-4);
-            if(biomes.contains(// check if name matches past name if so dont add))
-            biomes.add(buttonAdd(name,xPos,0,100,40));
-            xPos = xPos+ 110;
+            for(int x = 0 ;x<biomes.size();x++){
+                if(name.equals(biomes.get(x).getName())){
+                   exists = true;
+               }
+            }
+            if(!exists) {
+                biomes.add(buttonAdd(name, xPos, 0, 100, 40));
+                xPos = xPos+ 110;
+            }
         }
-
-
-
-
-
-        sort = buttonAdd("Alphabetical",100,100,80,40);
-        sort = buttonAdd("shuffle",180,100,80,40);
-        sort = buttonAdd("ReverseAlpha",260,100,80,40);
+        sort[0] = buttonAdd("Alphabetical",100,100,80,40);
+        sort[1] = buttonAdd("shuffle",180,100,80,40);
+        sort[2] = buttonAdd("ReverseAlpha",260,100,80,40);
         JButton back = buttonAdd("back to map",400,500,100,80);
     }
-
     public JButton buttonAdd(String name, int x, int y,  int width, int height) {
         JButton button;
         button = new JButton(name);
         button.setBounds(x, y, width, height);
         button.addActionListener(new ClickButton());
+        button.setName(name);
         add(button);
         return button;
     }
@@ -56,11 +58,8 @@ public class BiomeDisplay extends JPanel{
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Alphabetical")) {
                 String[] names = new String[biomes.size()];
-
                 for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
-
                 names = (String[]) alphabetical(names, false);
-
                 for (int i = 0; i < names.length; i++) {
                    for (int y = 0; y<names.length;y++){
                        if (names[i].equals(biomes.get(y).getActionCommand())){
@@ -102,6 +101,7 @@ public class BiomeDisplay extends JPanel{
             else if(e.getActionCommand().equals("back to map")){
                 change.toMap();
             } else {
+                //display whole biome
                     image = new ImageIcon("Map Squares/"+ e.getActionCommand() +".jpg");
                     imageCorner = new Point(0, 0);
                     repaint();
