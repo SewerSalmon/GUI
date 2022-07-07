@@ -10,6 +10,9 @@ import java.util.Objects;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
+    back to map dont work
+
+
     // make it swap map not make enterly new frame
     ArrayList<JButton> biomes = new ArrayList<>();
     JButton sort[] = new JButton[3];
@@ -17,17 +20,19 @@ public class BiomeDisplay extends JPanel{
     Point imageCorner;
     String currentBiome;
     MyFrame change;
+    File[] folder;
 
     public BiomeDisplay(String biome, MyFrame a){
         change = a;
         currentBiome = biome;
         this.setLayout(null);
-        File[] folder = new File("Map Squares/").listFiles();
+        folder = new File("Map Squares/").listFiles();
 
         int xPos = 10;
         for(File file: folder){
             boolean exists = false;
-            String name = file.getName().substring(1,file.getName().length()-4);
+            String name = file.getName().substring(0,file.getName().length()-4).replaceAll("[0-9]","");
+            name =  name.replace(".", "");
             for(int x = 0 ;x<biomes.size();x++){
                 if(name.equals(biomes.get(x).getName())){
                    exists = true;
@@ -35,14 +40,15 @@ public class BiomeDisplay extends JPanel{
             }
             if(!exists) {
                 biomes.add(buttonAdd(name, xPos, 0, 100, 40));
-                xPos = xPos+ 110;
+                xPos = xPos+ 100;
             }
         }
         sort[0] = buttonAdd("Alphabetical",100,100,80,40);
         sort[1] = buttonAdd("shuffle",180,100,80,40);
         sort[2] = buttonAdd("ReverseAlpha",260,100,80,40);
-        JButton back = buttonAdd("back to map",400,500,100,80);
-    }
+        JButton back = buttonAdd("Back to map",400,500,100,80);
+      }
+
     public JButton buttonAdd(String name, int x, int y,  int width, int height) {
         JButton button;
         button = new JButton(name);
@@ -63,7 +69,7 @@ public class BiomeDisplay extends JPanel{
                 for (int i = 0; i < names.length; i++) {
                    for (int y = 0; y<names.length;y++){
                        if (names[i].equals(biomes.get(y).getActionCommand())){
-                          biomes.get(y).setBounds(5+(i*85),0,80,40);
+                          biomes.get(y).setBounds(10+(i*100),0,100,40);
                        }
                    }
                 }
@@ -78,7 +84,7 @@ public class BiomeDisplay extends JPanel{
                 for (int i = 0; i < names.length; i++) {
                     for (int y = 0; y<names.length;y++){
                         if (names[i].equals(biomes.get(y).getActionCommand())){
-                            biomes.get(y).setBounds(5+(i*85),0,80,40);
+                            biomes.get(y).setBounds(10+(i*100),0,100,40);
                         }
                     }
                 }
@@ -93,7 +99,7 @@ public class BiomeDisplay extends JPanel{
                 for (int i = 0; i < names.length; i++) {
                     for (int y = 0; y<names.length;y++){
                         if (names[i].equals(biomes.get(y).getActionCommand())){
-                            biomes.get(y).setBounds(5+(i*85),0,80,40);
+                            biomes.get(y).setBounds(10+(i*100),0,100,40);
                         }
                     }
                 }
@@ -102,6 +108,10 @@ public class BiomeDisplay extends JPanel{
                 change.toMap();
             } else {
                 //display whole biome
+                for(File file: folder){
+                    file.getName().contains(e.getActionCommand());
+                }
+
                     image = new ImageIcon("Map Squares/"+ e.getActionCommand() +".jpg");
                     imageCorner = new Point(0, 0);
                     repaint();

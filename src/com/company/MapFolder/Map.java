@@ -13,7 +13,8 @@ public class Map {
         int counter=0;
         for(int x = 0; x<fH.lineAmount;x++) {
             for(int y = 0;y<fH.getCollums();y++) {
-                mapSquares[counter] = new MapSquare(fH.getRecord(x).split("\\s+")[y],counter);
+                String name[] = fH.getRecord(x).split("\\s+");
+                mapSquares[counter] = new MapSquare(name[y],counter);
                 counter++;
             }
         }
