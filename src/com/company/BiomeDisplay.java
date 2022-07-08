@@ -2,29 +2,25 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
-    back to map dont work
-
 
     // make it swap map not make enterly new frame
     ArrayList<JButton> biomes = new ArrayList<>();
     JButton sort[] = new JButton[3];
     ImageIcon image;
     Point imageCorner;
-    String currentBiome;
     MyFrame change;
     File[] folder;
 
     public BiomeDisplay(String biome, MyFrame a){
         change = a;
-        currentBiome = biome;
         this.setLayout(null);
         folder = new File("Map Squares/").listFiles();
 
@@ -59,6 +55,7 @@ public class BiomeDisplay extends JPanel{
         return button;
     }
 
+    ArrayList<String> imagesInBiome = new ArrayList<String>();
     private class ClickButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -104,17 +101,19 @@ public class BiomeDisplay extends JPanel{
                     }
                 }
             }
-            else if(e.getActionCommand().equals("back to map")){
+            else if(e.getActionCommand().equals("Back to map")){
                 change.toMap();
             } else {
+                imagesInBiome.clear();
                 //display whole biome
                 for(File file: folder){
-                    file.getName().contains(e.getActionCommand());
+                   if(file.getName().contains(e.getActionCommand())){
+                       imagesInBiome.add(file.getName());
+                   }
                 }
-
-                    image = new ImageIcon("Map Squares/"+ e.getActionCommand() +".jpg");
-                    imageCorner = new Point(0, 0);
-                    repaint();
+                DragPanel("Map Squares/" +imagesInBiome.get(0)+".jpg",new Point(0,0));
+                imageCorner.setLocation(prevPt);
+                repaint();
             }
         }
 
@@ -159,11 +158,61 @@ public class BiomeDisplay extends JPanel{
             array[index2] = temp;
         }
     }
+
+
+    int WIDTH;
+    int HEIGHT;
+    Point prevPt = new Point(0, 0);
+    public void DragPanel(String FileLocation,Point point) {
+        image = new ImageIcon(FileLocation);
+        WIDTH = image.getIconWidth();
+        HEIGHT = image.getIconHeight();
+        imageCorner = point;
+        ClickListener clickListener = new ClickListener();
+        DragListener dragListener = new DragListener();
+        addMouseListener(clickListener);
+        addMouseMotionListener(dragListener);
+    }
+
+    boolean ClickedInImage;
+
+    private class ClickListener extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            ClickedInImage = false;
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                if ((e.getPoint().getX() <= imageCorner.getX()+(imagesInBiome.size()-1)*500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + (imagesInBiome.size()-1)*500) && (e.getPoint().getY() <= imageCorner.getY()+(imagesInBiome.size()-1)*500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + (imagesInBiome.size()-1)*500)) {
+                    prevPt = e.getPoint();
+                    ClickedInImage = true;
+                } else {
+                    ClickedInImage = false;
+                }
+
+            }
+        }
+    }
+
+    private class DragListener extends MouseMotionAdapter {
+        public void mouseDragged(MouseEvent e) {
+            if (ClickedInImage) {
+                Point currentPt = e.getPoint();//translate moves object by that much
+                imageCorner.translate((int) (currentPt.getX() - prevPt.getX()), (int) (currentPt.getY() - prevPt.getY()));
+                prevPt = currentPt;
+                repaint();
+            }
+        }
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (!(imageCorner == null)) {
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
+
+            for(int x = 1;x<imagesInBiome.size();x++){
+                if(Integer.parseInt(imagesInBiome.get(0).split("\\.")[0])<(Integer.parseInt(imagesInBiome.get(x).split("\\.")[0]))){
+                    (new ImageIcon(imagesInBiome.get(x))).paintIcon(this,g,(int)imageCorner.getX(),(int)imageCorner.getY()+(500*Integer.parseInt(imagesInBiome.get(x).split("\\.")[0])));
+                }
+            }
+
         }
     }
 

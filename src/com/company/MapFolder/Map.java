@@ -49,38 +49,6 @@ public class Map {
 
     }
 
-
-    public void move(){
-        Display();
-        CreateSurroundings();
-        Scanner Ui = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("u/d/l/r");
-        String input = Ui.nextLine();
-
-        MapSquare oldpos = currentPos;
-        if(input.equals("u")){
-            if(currentPos.getUp() != null){
-                SetCurrent(currentPos.getUp());
-            }
-        }
-        if(input.equals("d")){
-            if(currentPos.getDown() != null){
-                SetCurrent(currentPos.getDown());
-            }
-        }
-        if(input.equals("l")){
-            if(currentPos.getLeft() != null){
-                SetCurrent(currentPos.getLeft());
-            }
-        }
-        if(input.equals("r")){
-            if(currentPos.getRight() != null){
-                SetCurrent(currentPos.getRight());
-            }
-        }
-        oldpos.clear();
-    }
-
     public void Display(){
         String newpos;
         newpos = currentPos.name();
