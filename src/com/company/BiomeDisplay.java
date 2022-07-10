@@ -111,7 +111,7 @@ public class BiomeDisplay extends JPanel{
                        imagesInBiome.add(file.getName());
                    }
                 }
-                DragPanel("Map Squares/" +imagesInBiome.get(0)+".jpg",new Point(0,0));
+                DragPanel("Map Squares/" +imagesInBiome.get(0),new Point(0,0));
                 imageCorner.setLocation(prevPt);
                 repaint();
             }
@@ -180,7 +180,7 @@ public class BiomeDisplay extends JPanel{
         public void mousePressed(MouseEvent e) {
             ClickedInImage = false;
             if (e.getButton() == MouseEvent.BUTTON1) {
-                if ((e.getPoint().getX() <= imageCorner.getX()+(imagesInBiome.size()-1)*500 + WIDTH && e.getPoint().getX() >= imageCorner.getX() + (imagesInBiome.size()-1)*500) && (e.getPoint().getY() <= imageCorner.getY()+(imagesInBiome.size()-1)*500 + HEIGHT && e.getPoint().getY() >= imageCorner.getY() + (imagesInBiome.size()-1)*500)) {
+                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX() && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()))) {
                     prevPt = e.getPoint();
                     ClickedInImage = true;
                 } else {
@@ -208,13 +208,15 @@ public class BiomeDisplay extends JPanel{
             image.paintIcon(this, g, (int) imageCorner.getX(), (int) imageCorner.getY());
 
             for(int x = 1;x<imagesInBiome.size();x++){
-                if(Integer.parseInt(imagesInBiome.get(0).split("\\.")[0])<(Integer.parseInt(imagesInBiome.get(x).split("\\.")[0]))){
-                    (new ImageIcon(imagesInBiome.get(x))).paintIcon(this,g,(int)imageCorner.getX(),(int)imageCorner.getY()+(500*Integer.parseInt(imagesInBiome.get(x).split("\\.")[0])));
+
+                   int moveX = 500 * ( Integer.parseInt(imagesInBiome.get(x).split("\\.")[1]) - Integer.parseInt(imagesInBiome.get(0).split("\\.")[1]) );
+                   int moveY = 500 * ( Integer.parseInt(imagesInBiome.get(x).split("\\.")[0]) - Integer.parseInt(imagesInBiome.get(0).split("\\.")[0]) );
+
+                    (new ImageIcon("Map Squares/" +imagesInBiome.get(0))).paintIcon(this,g,(int)imageCorner.getX() + moveX,(int)imageCorner.getY() + moveY);
                 }
             }
 
-        }
     }
-
-
 }
+
+
