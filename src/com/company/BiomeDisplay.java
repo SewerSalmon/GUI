@@ -19,7 +19,7 @@ public class BiomeDisplay extends JPanel{
     MyFrame change;
     File[] folder;
 
-    public BiomeDisplay(String biome, MyFrame a){
+    public BiomeDisplay(MyFrame a){
         change = a;
         this.setLayout(null);
         folder = new File("Map Squares/").listFiles();
@@ -105,7 +105,6 @@ public class BiomeDisplay extends JPanel{
                 change.toMap();
             } else {
                 imagesInBiome.clear();
-                //display whole biome
                 for(File file: folder){
                    if(file.getName().contains(e.getActionCommand())){
                        imagesInBiome.add(file.getName());
@@ -180,13 +179,8 @@ public class BiomeDisplay extends JPanel{
         public void mousePressed(MouseEvent e) {
             ClickedInImage = false;
             if (e.getButton() == MouseEvent.BUTTON1) {
-                if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH && e.getPoint().getX() >= imageCorner.getX() && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT && e.getPoint().getY() >= imageCorner.getY()))) {
-                    prevPt = e.getPoint();
-                    ClickedInImage = true;
-                } else {
-                    ClickedInImage = false;
-                }
-
+                prevPt = e.getPoint();
+                ClickedInImage = true;
             }
         }
     }
@@ -212,7 +206,7 @@ public class BiomeDisplay extends JPanel{
                    int moveX = 500 * ( Integer.parseInt(imagesInBiome.get(x).split("\\.")[1]) - Integer.parseInt(imagesInBiome.get(0).split("\\.")[1]) );
                    int moveY = 500 * ( Integer.parseInt(imagesInBiome.get(x).split("\\.")[0]) - Integer.parseInt(imagesInBiome.get(0).split("\\.")[0]) );
 
-                    (new ImageIcon("Map Squares/" +imagesInBiome.get(0))).paintIcon(this,g,(int)imageCorner.getX() + moveX,(int)imageCorner.getY() + moveY);
+                    (new ImageIcon("Map Squares/" +imagesInBiome.get(x))).paintIcon(this,g,(int)imageCorner.getX() + moveX,(int)imageCorner.getY() + moveY);
                 }
             }
 
