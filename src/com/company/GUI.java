@@ -1,7 +1,5 @@
 package com.company;
 
-import com.company.MapFolder.Map;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
