@@ -18,12 +18,13 @@ public class BiomeDisplay extends JPanel{
     Point imageCorner;
     MyFrame change;
     File[] folder;
+    String currentBiome;
 
     public BiomeDisplay(MyFrame a){
+       // make a biome come in when right click on map  - currentBiome = inputBiome;
         change = a;
         this.setLayout(null);
         folder = new File("Map Squares/").listFiles();
-
         int xPos = 10;
         for(File file: folder){
             boolean exists = false;
@@ -104,16 +105,21 @@ public class BiomeDisplay extends JPanel{
             else if(e.getActionCommand().equals("Back to map")){
                 change.toMap();
             } else {
-                imagesInBiome.clear();
-                for(File file: folder){
-                   if(file.getName().contains(e.getActionCommand())){
-                       imagesInBiome.add(file.getName());
-                   }
-                }
-                DragPanel("Map Squares/" +imagesInBiome.get(0),new Point(0,0));
-                imageCorner.setLocation(prevPt);
-                repaint();
+              biomeChange(e.getActionCommand());
             }
+        }
+
+        public void biomeChange(String biome){
+            imagesInBiome.clear();
+            for(File file: folder){
+                if(file.getName().contains(biome)){
+                    imagesInBiome.add(file.getName());
+                }
+            }
+            currentBiome = biome;
+            DragPanel("Map Squares/" +imagesInBiome.get(0),new Point(0,0));
+            imageCorner.setLocation(prevPt);
+            repaint();
         }
 
         public Comparable[]  alphabetical(Comparable[] array, boolean reverse){
