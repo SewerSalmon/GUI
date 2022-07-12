@@ -18,9 +18,9 @@ public class MyFrame extends JFrame{
         BD.setVisible(false);
         gui.setVisible(true);
     }
-    public void toBiome(){
+    public void toBiome(String biome){
         gui.setVisible(false);
-        BD = new BiomeDisplay(this);
+        BD = new BiomeDisplay(this,biome);
         add(BD);
         BD.setVisible(true);
     }

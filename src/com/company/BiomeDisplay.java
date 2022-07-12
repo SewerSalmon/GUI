@@ -6,45 +6,87 @@ import java.awt.event.*;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
 
     // make it swap map not make enterly new frame
-    ArrayList<JButton> biomes = new ArrayList<>();
     JButton sort[] = new JButton[3];
     ImageIcon image;
     Point imageCorner;
     MyFrame change;
     File[] folder;
     String currentBiome;
+    JComboBox<String> biomes = new JComboBox();
 
-    public BiomeDisplay(MyFrame a){
-       // make a biome come in when right click on map  - currentBiome = inputBiome;
+    public BiomeDisplay(MyFrame a,String biome){
         change = a;
         this.setLayout(null);
+        biomes.setBounds(10,10,200,100);
+        ActionListener switchDisplay = new ActionListener() {//add actionlistner to listen for change
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println((String) biomes.getSelectedItem());
+                biomeChange((String) biomes.getSelectedItem());
+            }
+        };
+        biomes.addActionListener(switchDisplay);
+        add(biomes);
+
+
+
         folder = new File("Map Squares/").listFiles();
-        int xPos = 10;
         for(File file: folder){
             boolean exists = false;
             String name = file.getName().substring(0,file.getName().length()-4).replaceAll("[0-9]","");
             name =  name.replace(".", "");
-            for(int x = 0 ;x<biomes.size();x++){
-                if(name.equals(biomes.get(x).getName())){
+            for(int x = 0 ;x<biomes.getItemCount();x++){
+                if(name.equals(biomes.getItemAt(x))){
                    exists = true;
                }
             }
             if(!exists) {
-                biomes.add(buttonAdd(name, xPos, 0, 100, 40));
-                xPos = xPos+ 100;
+                biomes.addItem(name);
             }
         }
-        sort[0] = buttonAdd("Alphabetical",100,100,80,40);
-        sort[1] = buttonAdd("shuffle",180,100,80,40);
-        sort[2] = buttonAdd("ReverseAlpha",260,100,80,40);
+//        sort[0] = buttonAdd("Alphabetical",100,100,80,40);
+//        sort[1] = buttonAdd("shuffle",180,100,80,40);
+//        sort[2] = buttonAdd("ReverseAlpha",260,100,80,40);
         JButton back = buttonAdd("Back to map",400,500,100,80);
+        biomeChange(biome);
+        biomes.setSelectedItem(currentBiome);
       }
+      //try to overide add item with thjis
+//    @Override public void addItem(Object obj){
+//        int count = getItemCount();
+//        String toAdd = (String) obj;
+//
+//        List<String> items = new ArrayList<String>();
+//        for(int i = 0; i < count; i++){
+//            items.add((String)getItemAt(i));
+//        }
+//
+//        if(items.size() == 0){
+//            super.addItem(toAdd);
+//            return;
+//        }else{
+//            if(toAdd.compareTo(items.get(0)) <= 0){
+//                insertItemAt(toAdd, 0);
+//            }else{
+//                int lastIndexOfHigherNum = 0;
+//                for(int i = 0; i < count; i++){
+//                    if(toAdd.compareTo(items.get(i)) > 0){
+//                        lastIndexOfHigherNum = i;
+//                    }
+//                }
+//                insertItemAt(toAdd, lastIndexOfHigherNum+1);
+//            }
+//        }
+//    }
+//};
+
 
     public JButton buttonAdd(String name, int x, int y,  int width, int height) {
         JButton button;
@@ -60,13 +102,14 @@ public class BiomeDisplay extends JPanel{
     private class ClickButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("Alphabetical")) {
-                String[] names = new String[biomes.size()];
-                for (int i = 0; i < names.length; i++) names[i] = biomes.get(i).getActionCommand();
+         /*   if (e.getActionCommand().equals("Alphabetical")) {
+                String[] names = new String[biomes.getItemCount()];
+                for (int i = 0; i < names.length; i++) names[i] = biomes.getItemAt(i);
                 names = (String[]) alphabetical(names, false);
                 for (int i = 0; i < names.length; i++) {
                    for (int y = 0; y<names.length;y++){
-                       if (names[i].equals(biomes.get(y).getActionCommand())){
+                       if (names[i].equals(biomes.getItemAt(y))){
+
                           biomes.get(y).setBounds(10+(i*100),0,100,40);
                        }
                    }
@@ -101,25 +144,10 @@ public class BiomeDisplay extends JPanel{
                         }
                     }
                 }
-            }
-            else if(e.getActionCommand().equals("Back to map")){
+            }*/
+            if(e.getActionCommand().equals("Back to map")){
                 change.toMap();
-            } else {
-              biomeChange(e.getActionCommand());
             }
-        }
-
-        public void biomeChange(String biome){
-            imagesInBiome.clear();
-            for(File file: folder){
-                if(file.getName().contains(biome)){
-                    imagesInBiome.add(file.getName());
-                }
-            }
-            currentBiome = biome;
-            DragPanel("Map Squares/" +imagesInBiome.get(0),new Point(0,0));
-            imageCorner.setLocation(prevPt);
-            repaint();
         }
 
         public Comparable[]  alphabetical(Comparable[] array, boolean reverse){
@@ -164,6 +192,18 @@ public class BiomeDisplay extends JPanel{
         }
     }
 
+    public void biomeChange(String biome){
+        imagesInBiome.clear();
+        for(File file: folder){
+            if(file.getName().contains(biome)){
+                imagesInBiome.add(file.getName());
+            }
+        }
+        currentBiome = biome;
+        DragPanel("Map Squares/" +imagesInBiome.get(0),new Point(0,0));
+        imageCorner.setLocation(prevPt);
+        repaint();
+    }
 
     int WIDTH;
     int HEIGHT;

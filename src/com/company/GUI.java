@@ -116,40 +116,32 @@ public class GUI extends JPanel {
                     int checkY = Integer.parseInt(currentSquare.split("\\.")[0]);
 
                     if (e.getPoint().getX() - imageCorner.getX() > 1000) {
-                        System.out.println("a");
                         checkX = Integer.parseInt(currentSquare.split("\\.")[1]) + 2;
                         addX = 1000;
                     } else if (e.getPoint().getX() - imageCorner.getX() > 500) {
                         checkX = Integer.parseInt(currentSquare.split("\\.")[1]) + 1;
-                        System.out.println("b");
                         addX = 500;
                     }
                     if (e.getPoint().getX() - imageCorner.getX() < -500) {
                         checkX = Integer.parseInt(currentSquare.split("\\.")[1]) - 2;
-                        System.out.println("c");
                         addX = -1000;
                     } else if (e.getPoint().getX() - imageCorner.getX() < 0) {
                         checkX = Integer.parseInt(currentSquare.split("\\.")[1]) - 1;
-                        System.out.println("d");
                         addX = -500;
                     }
 
                     if (e.getPoint().getY() - imageCorner.getY() > 1000) {
                         checkY = Integer.parseInt(currentSquare.split("\\.")[0]) + 2;
-                        System.out.println("1");
                         addY = 1000;
                     } else if (e.getPoint().getY() - imageCorner.getY() > 500) {
                         checkY = Integer.parseInt(currentSquare.split("\\.")[0]) + 1;
-                        System.out.println("2");
                         addY = 500;
                     }
                     if (e.getPoint().getY() - imageCorner.getY() < -500) {
                         checkY = Integer.parseInt(currentSquare.split("\\.")[0]) - 2;
-                        System.out.println("3");
                         addY = -1000;
                     } else if (e.getPoint().getY() - imageCorner.getY() < 0) {
                         checkY = Integer.parseInt(currentSquare.split("\\.")[0]) - 1;
-                        System.out.println("4");
                         addY = -500;
                     }
 
@@ -174,7 +166,40 @@ public class GUI extends JPanel {
             }
             if (e.getButton() == MouseEvent.BUTTON3) {
                 if ((e.getPoint().getX() <= imageCorner.getX() + WIDTH + (500 * imagesPositive.getX()) && e.getPoint().getX() >= imageCorner.getX() + (500 * imagesNegative.getX())) && (e.getPoint().getY() <= imageCorner.getY() + HEIGHT + (500 * imagesPositive.getY()) && e.getPoint().getY() >= imageCorner.getY() + (500 * imagesNegative.getY()))) {
-                   change.toBiome();
+                    int checkX = Integer.parseInt(currentSquare.split("\\.")[1]);
+                    int checkY = Integer.parseInt(currentSquare.split("\\.")[0]);
+
+                    if (e.getPoint().getX() - imageCorner.getX() > 1000) {
+                        checkX = Integer.parseInt(currentSquare.split("\\.")[1]) + 2;
+                    } else if (e.getPoint().getX() - imageCorner.getX() > 500) {
+                        checkX = Integer.parseInt(currentSquare.split("\\.")[1]) + 1;
+                    }
+                    if (e.getPoint().getX() - imageCorner.getX() < -500) {
+                        checkX = Integer.parseInt(currentSquare.split("\\.")[1]) - 2;
+                    } else if (e.getPoint().getX() - imageCorner.getX() < 0) {
+                        checkX = Integer.parseInt(currentSquare.split("\\.")[1]) - 1;
+                    }
+
+                    if (e.getPoint().getY() - imageCorner.getY() > 1000) {
+                        checkY = Integer.parseInt(currentSquare.split("\\.")[0]) + 2;
+                    } else if (e.getPoint().getY() - imageCorner.getY() > 500) {
+                        checkY = Integer.parseInt(currentSquare.split("\\.")[0]) + 1;
+                    }
+                    if (e.getPoint().getY() - imageCorner.getY() < -500) {
+                        checkY = Integer.parseInt(currentSquare.split("\\.")[0]) - 2;
+                    } else if (e.getPoint().getY() - imageCorner.getY() < 0) {
+                        checkY = Integer.parseInt(currentSquare.split("\\.")[0]) - 1;
+                    }
+                    String biome="";
+
+                    for (int x = 0; x < mapSquares.length; x++) {
+                        if (mapSquares[x].contains(checkY + "." + checkX)) {
+                            biome = mapSquares[x].split("\\.")[2];
+                            continue;
+                        }
+                    }
+
+                   change.toBiome(biome);
                 }
             }
         }
