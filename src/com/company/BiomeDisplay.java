@@ -4,10 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class BiomeDisplay extends JPanel{
@@ -19,7 +17,34 @@ public class BiomeDisplay extends JPanel{
     MyFrame change;
     File[] folder;
     String currentBiome;
-    JComboBox<String> biomes = new JComboBox();
+    JComboBox<String> biomes = new JComboBox(){
+        @Override public void addItem(Object obj){
+        int count = getItemCount();
+        String toAdd = (String) obj;
+
+        ArrayList<String> items = new ArrayList<String>();
+        for(int i = 0; i < count; i++){
+            items.add((String)getItemAt(i));
+        }
+
+        if(items.size() == 0){
+            super.addItem(toAdd);
+            return;
+        }else{
+            if(toAdd.compareTo(items.get(0)) <= 0){
+                insertItemAt(toAdd, 0);
+            }else{
+                int lastIndexOfHigherNum = 0;
+                for(int i = 0; i < count; i++){
+                    if(toAdd.compareTo(items.get(i)) > 0){
+                        lastIndexOfHigherNum = i;
+                    }
+                }
+                insertItemAt(toAdd, lastIndexOfHigherNum+1);
+            }
+        }
+    }
+    };
 
     public BiomeDisplay(MyFrame a,String biome){
         change = a;
@@ -58,35 +83,6 @@ public class BiomeDisplay extends JPanel{
         biomeChange(biome);
         biomes.setSelectedItem(currentBiome);
       }
-      //try to overide add item with thjis
-//    @Override public void addItem(Object obj){
-//        int count = getItemCount();
-//        String toAdd = (String) obj;
-//
-//        List<String> items = new ArrayList<String>();
-//        for(int i = 0; i < count; i++){
-//            items.add((String)getItemAt(i));
-//        }
-//
-//        if(items.size() == 0){
-//            super.addItem(toAdd);
-//            return;
-//        }else{
-//            if(toAdd.compareTo(items.get(0)) <= 0){
-//                insertItemAt(toAdd, 0);
-//            }else{
-//                int lastIndexOfHigherNum = 0;
-//                for(int i = 0; i < count; i++){
-//                    if(toAdd.compareTo(items.get(i)) > 0){
-//                        lastIndexOfHigherNum = i;
-//                    }
-//                }
-//                insertItemAt(toAdd, lastIndexOfHigherNum+1);
-//            }
-//        }
-//    }
-//};
-
 
     public JButton buttonAdd(String name, int x, int y,  int width, int height) {
         JButton button;
