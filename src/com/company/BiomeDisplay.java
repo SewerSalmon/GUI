@@ -50,7 +50,7 @@ public class BiomeDisplay extends JPanel{
         change = a;
         this.setLayout(null);
         biomes.setBounds(10,10,200,100);
-        ActionListener switchDisplay = new ActionListener() {//add actionlistner to listen for change
+        ActionListener switchDisplay = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println((String) biomes.getSelectedItem());
@@ -59,8 +59,6 @@ public class BiomeDisplay extends JPanel{
         };
         biomes.addActionListener(switchDisplay);
         add(biomes);
-
-
 
         folder = new File("Map Squares/").listFiles();
         for(File file: folder){
