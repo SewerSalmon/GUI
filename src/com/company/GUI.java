@@ -11,6 +11,7 @@ public class GUI extends JPanel {
     MyFrame change;
 
     public GUI(MyFrame a) {
+        this.setBackground(Color.black);
         change = a;
         this.setLayout(null);
         buttonAdd("Isfan", 10, 0, 80, 40);

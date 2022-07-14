@@ -47,6 +47,8 @@ public class BiomeDisplay extends JPanel{
     };
 
     public BiomeDisplay(MyFrame a,String biome){
+
+        this.setBackground(Color.black);
         change = a;
         this.setLayout(null);
         biomes.setBounds(10,10,200,100);
